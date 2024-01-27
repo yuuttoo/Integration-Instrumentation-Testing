@@ -11,6 +11,9 @@ plugins {
 apply<com.ivy.buildsrc.IvyPlugin>()
 
 dependencies {
+    implementation(project(":core:domain"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:ui"))
     Hilt()
     HiltTesting(
         dependency = { api(it) },
