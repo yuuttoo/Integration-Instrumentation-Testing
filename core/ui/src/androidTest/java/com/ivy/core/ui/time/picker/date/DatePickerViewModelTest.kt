@@ -1,14 +1,15 @@
-package com.ivy.common.androidtest
+package com.ivy.core.ui.time.picker.date
 
 import app.cash.turbine.test
-import com.ivy.core.ui.time.picker.date.DatePickerEvent
-import com.ivy.core.ui.time.picker.date.DatePickerViewModel
+import assertk.assertThat
+import assertk.assertions.isEqualTo
+import com.ivy.common.androidtest.IvyAndroidTest
+import com.ivy.common.androidtest.MainCoroutineRule
 import com.ivy.core.ui.time.picker.date.data.PickerDay
 import com.ivy.core.ui.time.picker.date.data.PickerMonth
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Rule
 import org.junit.Test
 import java.time.LocalDate
@@ -34,7 +35,7 @@ class DatePickerViewModelTest: IvyAndroidTest() {
     fun testSelectingDate() = runTest {
         // Making sure, the test runs with a month != February, so
         // February can be selected
-        setDate(LocalDate.of(2023, 1, 1))
+        setDate(LocalDate.of(2024, 1, 1))
         viewModel.uiState.test {
             awaitItem() // Skip initial emission
 
@@ -47,7 +48,7 @@ class DatePickerViewModelTest: IvyAndroidTest() {
 
             val timeProviderDate = timeProvider.dateNow()
             assertThat(finalEmission.selected).isEqualTo(
-                LocalDate.of(timeProviderDate.year, 2, 28)
+                LocalDate.of(timeProviderDate.year, 2, 29)//February has 29days in 2024
             )
         }
     }
